@@ -1,11 +1,13 @@
-const CustomApiError = require("../Errors/customError");
+// const CustomApiError = require("../Errors/customError");
+const { BadRequestError } = require("../Errors");
+
 const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    throw new CustomApiError("please provide email and password", 400);
+    throw new BadRequestError("please provide email and password");
   }
   //this is just for demo. Dababase will provide id
   const id = new Date().getDate();
