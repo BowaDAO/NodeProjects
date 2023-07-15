@@ -1,4 +1,4 @@
-const { CustomApiError } = require("./customError");
+const CustomApiError = require("./customError");
 const { StatusCodes } = require("http-status-codes");
 
 class NotFoundError extends CustomApiError {
