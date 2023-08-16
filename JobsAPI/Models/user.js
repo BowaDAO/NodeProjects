@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-// arrow function does not work for below
+// This is to hash the password (arrow function does not work for below) (Many people write the below code in the controller)
 UserSchema.pre("save", async function () {
   const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
@@ -40,5 +40,11 @@ UserSchema.methods.createJWT = function () {
       expiresIn: process.env.JWT_LIFETIME,
     }
   );
+};
+
+//userPassword is the new password to confirm password
+UserSchema.methods.comparePassword = async function (userPassword) {
+  const isMatch = await bcrypt.compare(userPassword, this.password);
+  return isMatch;
 };
 module.exports = mongoose.model("user", UserSchema);
