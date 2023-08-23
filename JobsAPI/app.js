@@ -21,6 +21,8 @@ const jobsRouter = require("./Routes/jobs");
 const notFoundMiddleware = require("./Middlewares/notFound");
 const errorHandlerMiddleware = require("./Middlewares/errorHandler");
 
+app.use(express.json());
+
 //security packages
 app.set("trust proxy", 1);
 app.use(
@@ -29,7 +31,7 @@ app.use(
     max: 100,
   })
 );
-app.use(express.json());
+
 app.use(helmet());
 app.use(cors());
 // app.use(xss());
